@@ -45,9 +45,10 @@ char *server_files_directory;
  *   4) Send a 404 Not Found response.
  */
 
+/* Handle the request to take all the files in "FILES"*/
 void handle_files_request(int fd)
 {
-  printf("the thread number is %ld\n", pthread_self());
+  printf("The thread number is %ld\n", pthread_self());
   struct http_request *request = http_request_parse(fd);
   uint16_t resp_status_code;
   char *resp_mime_type;
@@ -55,7 +56,7 @@ void handle_files_request(int fd)
   char *resp_str;
   size_t response_size_bytes = 0;
 
-  /* absolute server root path */
+  /* Absolute server root path */
   char *path_buf = NULL;
   if (!(path_buf = getcwd(NULL, 0)))
   {
@@ -88,8 +89,8 @@ void handle_files_request(int fd)
 
   if (S_ISDIR(req_file.st_mode))
   {
-    // directory request
-    // check if there is index.html serve it if thats the case
+    // Directory request
+    // Check if there is index.html serve it if thats the case
     if (!(req_file_path = realloc(req_file_path,
                                   strlen(req_file_path) +
                                       strlen("index.html") * sizeof(char))))
@@ -374,6 +375,7 @@ void *thread_routine(void *arg)
   return NULL;
 }
 
+/* Create thread pool  */
 void init_thread_pool(int num_threads, void (*request_handler)(int))
 {
   wq_init(&work_queue); // Initialize work queue
@@ -405,8 +407,8 @@ void serve_forever(int *socket_number, void (*request_handler)(int))
     exit(errno);
   }
 
-  /* Setting some mysterious settings for our socket. See man setsockopt for
-     more info if curious. */
+  /* Setting some mysterious settings for server socket. See "man setsockopt" for
+     more info. */
   int socket_option = 1;
   if (setsockopt(*socket_number, SOL_SOCKET, SO_REUSEADDR, &socket_option,
                  sizeof(socket_option)) == -1)
