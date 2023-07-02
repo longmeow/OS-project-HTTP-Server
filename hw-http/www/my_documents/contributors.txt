@@ -1,8 +1,0 @@
-============================
-======= Contributors =======
-============================
-1. David Culler
-2. Arka Bhattacharya
-3. William Liu
-4. Alan Ton
-5. You

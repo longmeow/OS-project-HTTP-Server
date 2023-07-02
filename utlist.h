@@ -68,11 +68,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LDECLTYPE(x) decltype(x)
 #else /* VS2008 or older (or VS2010 in C mode) */
 #define NO_DECLTYPE
-#define LDECLTYPE(x) char*
+#define LDECLTYPE(x) char *
 #endif
 #elif defined(__ICCARM__)
 #define NO_DECLTYPE
-#define LDECLTYPE(x) char*
+#define LDECLTYPE(x) char *
 #else /* GNU, Sun and other compilers */
 #define LDECLTYPE(x) __typeof(x)
 #endif
@@ -82,32 +82,32 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * to dereference its prev/next pointers, and save/restore the real head.*/
 #ifdef NO_DECLTYPE
 #define _SV(elt, list)                                                                             \
-  _tmp = (char*)(list);                                                                            \
+  _tmp = (char *)(list);                                                                           \
   {                                                                                                \
-    char** _alias = (char**)&(list);                                                               \
+    char **_alias = (char **)&(list);                                                              \
     *_alias = (elt);                                                                               \
   }
-#define _NEXT(elt, list, next) ((char*)((list)->next))
+#define _NEXT(elt, list, next) ((char *)((list)->next))
 #define _NEXTASGN(elt, list, to, next)                                                             \
   {                                                                                                \
-    char** _alias = (char**)&((list)->next);                                                       \
-    *_alias = (char*)(to);                                                                         \
+    char **_alias = (char **)&((list)->next);                                                      \
+    *_alias = (char *)(to);                                                                        \
   }
 /* #define _PREV(elt,list,prev) ((char*)((list)->prev)) */
 #define _PREVASGN(elt, list, to, prev)                                                             \
   {                                                                                                \
-    char** _alias = (char**)&((list)->prev);                                                       \
-    *_alias = (char*)(to);                                                                         \
+    char **_alias = (char **)&((list)->prev);                                                      \
+    *_alias = (char *)(to);                                                                        \
   }
 #define _RS(list)                                                                                  \
   {                                                                                                \
-    char** _alias = (char**)&(list);                                                               \
+    char **_alias = (char **)&(list);                                                              \
     *_alias = _tmp;                                                                                \
   }
 #define _CASTASGN(a, b)                                                                            \
   {                                                                                                \
-    char** _alias = (char**)&(a);                                                                  \
-    *_alias = (char*)(b);                                                                          \
+    char **_alias = (char **)&(a);                                                                 \
+    *_alias = (char *)(b);                                                                         \
   }
 #else
 #define _SV(elt, list)
@@ -473,7 +473,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     if ((head) == (del)) {                                                                         \
       (head) = (head)->next;                                                                       \
     } else {                                                                                       \
-      char* _tmp = (char*)(head);                                                                  \
+      char *_tmp = (char *)(head);                                                                 \
       while ((head)->next && ((head)->next != (del))) {                                            \
         head = (head)->next;                                                                       \
       }                                                                                            \
@@ -481,7 +481,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         (head)->next = ((del)->next);                                                              \
       }                                                                                            \
       {                                                                                            \
-        char** _head_alias = (char**)&(head);                                                      \
+        char **_head_alias = (char **)&(head);                                                     \
         *_head_alias = _tmp;                                                                       \
       }                                                                                            \
     }                                                                                              \
