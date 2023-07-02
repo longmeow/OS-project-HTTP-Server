@@ -1,9 +1,3 @@
-Homework 2
-
-```
-./homework-2.pdf
-```
-
 ```
 make
 # static files serving 
